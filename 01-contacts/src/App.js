@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ContactsList from "./ContactsList";
+import "./App.css";
 
 export default class App extends Component {
   state = {
@@ -77,6 +78,10 @@ export default class App extends Component {
     ]
   };
   render() {
-    return <ContactsList contacts={this.state.contacts} />;
+    return (
+      <div className="center-container">
+        <ContactsList contacts={this.state.contacts} />
+      </div>
+    );
   }
 }

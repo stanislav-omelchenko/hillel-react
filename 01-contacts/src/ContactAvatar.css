@@ -1,0 +1,9 @@
+.contact-avatar {
+  display: table-cell;
+  background-color: indianred;
+  color: white;
+  font-size: 18pt;
+  clip-path: circle(50%);
+  text-align: center;
+  vertical-align: middle;
+}

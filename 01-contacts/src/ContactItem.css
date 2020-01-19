@@ -1,0 +1,31 @@
+.contact-item {
+  list-style: none;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+
+  background-color: #fafafa;
+  box-shadow: #505050 0 0 7px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.contact-avatar-cell {
+  grid-area: 1 / 1 / 3 / 2;
+  margin: 5px;
+  margin-right: 10px;
+}
+.contact-name-cell {
+  grid-area: 1 / 2 / 2 / 6;
+  font-size: 13pt;
+}
+.contact-phone-cell {
+  grid-area: 2 / 2 / 3 / 6;
+  color: #505050;
+  font-size: 11pt;
+  display: table-cell;
+  vertical-align: text-bottom;
+}
