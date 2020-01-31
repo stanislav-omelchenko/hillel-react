@@ -1,0 +1,16 @@
+.contact-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: indianred;
+  color: white;
+  font-size: 18pt;
+  line-height: 18pt;
+  clip-path: circle(50%);
+  text-align: center;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica",
+    sans-serif; // Segoe UI is not centered properly
+}

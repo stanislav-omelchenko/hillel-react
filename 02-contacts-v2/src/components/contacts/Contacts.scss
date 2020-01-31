@@ -1,0 +1,231 @@
+// Grid layout
+
+.contacts-root {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-areas:
+    "header header header header"
+    "pad-l contacts-list contacts-edit-form pad-r"
+    "pad-l contacts-add contacts-edit-form pad-r";
+  grid-template-columns: 1fr 2fr 4fr 1fr;
+  grid-template-rows: 4rem 1fr auto;
+  column-gap: 0.5rem;
+  min-height: 100%;
+}
+.pad-r {
+  grid-area: "pad-r";
+}
+.pad-l {
+  grid-area: "pad-l";
+}
+.header {
+  grid-area: header;
+}
+
+.contacts-list {
+  grid-area: contacts-list;
+  min-width: 20rem;
+}
+.contacts-edit-form {
+  grid-area: contacts-edit-form;
+}
+.contacts-add {
+  grid-area: contacts-add;
+}
+
+@media only screen and (max-width: 768px) {
+  .contacts-root {
+    background-color: lightblue;
+    grid-template-columns: 0fr 2fr 4fr 0fr;
+  }
+  .contacts-list {
+    min-width: 10rem;
+  }
+}
+
+// Styling
+
+.header {
+  background-color: #0f0f0f;
+  display: flex;
+  text-align: center;
+
+  > .title {
+    margin: auto;
+    color: #f0f0f0;
+    font-size: x-large;
+  }
+}
+.contacts-list .contacts-list-row {
+  display: grid;
+  grid-template-areas:
+    "avatar fullname closebtn"
+    "avatar phone _";
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+
+  margin: 0.5rem 0px;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: #808080 0px 0px 3px;
+
+  transition: background-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s,
+    transform ease-in-out 0.15s;
+
+  &:hover {
+    background-color: #f5f5f5;
+    box-shadow: #808080 0px 0px 5px;
+  }
+
+  &.selected {
+    background-color: #f2f2f2;
+    box-shadow: #808080 0px 0px 2px;
+    transform: translate(10px, 0);
+  }
+
+  .contact-avatar {
+    grid-area: avatar;
+    margin-right: 1rem;
+  }
+
+  .contact-name {
+    text-overflow: ellipsis;
+    grid-area: fullname;
+    font-weight: bold;
+    color: #3f3f3f;
+  }
+
+  .contact-phone {
+    text-overflow: ellipsis;
+    word-break: break-all;
+    grid-area: phone;
+    color: #6f6f6f;
+  }
+  button {
+    grid-area: closebtn;
+    position: relative;
+    top: -1rem;
+    right: -1rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+
+    border: #a00000 1px solid;
+    background-color: #f00000;
+    color: white;
+
+    outline: none;
+
+    transition: background-color ease-in-out 0.2s;
+    &:hover {
+      background-color: #f05050;
+    }
+    &:active {
+      background-color: #a00000;
+    }
+  }
+}
+
+.contacts-edit-form {
+  width: 100%;
+  height: 100%;
+
+  form {
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: #808080 0px 0px 3px;
+
+    margin: 0.5rem auto;
+    padding: 1rem;
+
+    max-width: 30rem;
+
+    .contact-edit-form-header {
+      width: 100%;
+      .contact-avatar {
+        margin: 0 auto;
+      }
+    }
+
+    input {
+      padding: 0.5rem;
+      width: 100%;
+      font-size: 12pt;
+      border-radius: 2px;
+      border: solid 1px #999999;
+    }
+
+    label {
+      margin-top: 0.5rem;
+      margin-bottom: 0.1rem;
+      color: #505050;
+    }
+
+    button {
+      padding: 0.5rem;
+      margin: 0 auto;
+      margin-top: 1rem;
+
+      font-size: 12pt;
+      border-radius: 2px;
+      border: solid 1px #158a40;
+      outline: 0;
+
+      transition: background-color ease-in-out 0.2s;
+      background-color: #40ba80;
+
+      &:hover {
+        background-color: #60daa0;
+      }
+
+      &:active {
+        background-color: #30aa70;
+      }
+
+      &:focus {
+        background-color: #30aa70;
+      }
+    }
+
+    input,
+    label,
+    button {
+      display: block;
+    }
+  }
+}
+
+.contacts-add {
+  margin-bottom: 1rem;
+
+  button {
+    display: block;
+    padding: 0.5rem;
+    margin: 0 auto;
+
+    font-size: 12pt;
+    border-radius: 2px;
+    border: solid 1px #158a40;
+    outline: 0;
+
+    transition: background-color ease-in-out 0.2s;
+    background-color: #40ba80;
+
+    &:hover {
+      background-color: #60daa0;
+    }
+
+    &:active {
+      background-color: #30aa70;
+    }
+
+    &:focus {
+      background-color: #30aa70;
+    }
+  }
+}
+// .contact-avatar {
+//   float: left;
+// }
