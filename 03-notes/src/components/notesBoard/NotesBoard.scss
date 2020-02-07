@@ -1,0 +1,104 @@
+.wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "header"
+    "body";
+  grid-template-columns: auto;
+  grid-template-rows: auto 1fr;
+}
+.notes-header {
+  grid-area: header;
+  width: 100%;
+  background-color: #333333;
+  color: #cccccc;
+  font-size: 16pt;
+  font-weight: bolder;
+  > div {
+    display: flex;
+  }
+  span {
+    display: block;
+    width: 100%;
+    line-height: 42px;
+  }
+
+  button {
+    height: 32px;
+    width: 32px;
+    line-height: 32px;
+    //font-family: Arial;
+    font-size: 14pt;
+    font-weight: bold;
+    border-radius: 50%;
+    border: 0;
+  }
+
+  #addNote {
+    margin: 5px;
+    background-color: #0f1;
+    &:hover {
+      background-color: #5f9;
+    }
+  }
+
+  #clearNotes {
+    margin: 5px 0;
+    background-color: #f01;
+    &:hover {
+      background-color: #f59;
+    }
+  }
+}
+
+.notes-container {
+  position: relative;
+  grid-area: body;
+  width: 100%;
+  height: 100%;
+  background-color: papayawhip;
+}
+
+.note {
+  display: grid;
+  height: 200px;
+  width: 300px;
+
+  grid-template-areas:
+    "title buttons"
+    "body body";
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+
+  position: absolute;
+  border: 1px solid saddlebrown;
+  border-radius: 2px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f9999e;
+  .title {
+    grid-area: title;
+    width: 100%;
+    font-size: 12pt;
+    font-weight: bold;
+    cursor: grab;
+    &.grabbing {
+      cursor: grabbing;
+    }
+  }
+
+  .buttons {
+    grid-area: buttons;
+  }
+  .body {
+    grid-area: body;
+    textarea {
+      width: 100%;
+      height: 100%;
+      resize: none;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10pt;
+    }
+  }
+  resize: both;
+}

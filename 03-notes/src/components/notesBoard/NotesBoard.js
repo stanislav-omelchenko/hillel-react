@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import NotesContainer from "../notesContainer/NotesContainer";
+import NotesHeader from "../notesHeader/NotesHeader";
 
-function createEmptyNote() {
+import "./NotesBoard.scss";
+
+function createEmptyNote(title, text) {
   return {
     id: Date.now(),
-    title: "Title",
-    text: "Text",
-    rectangle: {
+    title: title ?? "Title",
+    text: text ?? "Text",
+    position: {
       x: 200,
-      y: 200,
-      w: 300,
-      h: 150
+      y: 200
     }
   };
 }
@@ -18,15 +19,40 @@ function createEmptyNote() {
 //function clearNoteClick()
 
 export default function NotesBoard(props) {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([createEmptyNote("Hello", "Grab me :)")]);
 
   const addNoteClick = () => {
-    console.log(notes);
     setNotes([...notes, createEmptyNote()]);
   };
+
   const clearNotesClick = () => {
-    console.log(notes);
     setNotes([]);
+  };
+
+  const deleteNoteClick = id => {
+    setNotes(notes.filter(n => n.id !== id));
+  };
+
+  const noteFieldChange = note => {
+    const newNotes = notes.map(n => {
+      if (n.id === note.id) {
+        return note;
+      } else {
+        return n;
+      }
+    });
+
+    setNotes(newNotes);
+  };
+
+  const noteMove = (id, pos) => {
+    let note = notes.find(n => n.id === id);
+    if (note !== undefined) {
+      noteFieldChange({
+        ...note,
+        position: pos
+      });
+    }
   };
   useEffect(() => {
     // Reading local storage
@@ -35,43 +61,28 @@ export default function NotesBoard(props) {
     if (storedNotes !== null) {
       setNotes(JSON.parse(storedNotes));
     } else {
-      console.log(notes);
       localStorage.setItem("notes", JSON.stringify(notes));
     }
   }, []);
 
   useEffect(() => {
-    // Setting up callbacks
-    document.getElementById("addNote").addEventListener("click", addNoteClick);
-    document
-      .getElementById("clearNotes")
-      .addEventListener("click", clearNotesClick);
-
-    return () => {
-      document
-        .getElementById("addNote")
-        .removeEventListener("click", addNoteClick);
-      document
-        .getElementById("clearNotes")
-        .removeEventListener("click", clearNotesClick);
-    };
-  }, [notes]);
-
-  useEffect(() => {
-    console.log("notes list changed", notes);
     localStorage.setItem("notes", JSON.stringify(notes));
 
     return () => {};
   }, [notes]);
 
   return (
-    <>
-      <header className="notes-board">
-        <span>Notes Board</span>
-        <button id="addNote">+</button>
-        <button id="clearNotes">&#8635;</button>
-      </header>
-      <NotesContainer notes={notes} />
-    </>
+    <div className="wrapper">
+      <NotesHeader
+        onAddNoteClick={addNoteClick}
+        onClearNotesClick={clearNotesClick}
+      />
+      <NotesContainer
+        notes={notes}
+        onDeleteClick={deleteNoteClick}
+        onNoteFieldChange={noteFieldChange}
+        onNoteMove={noteMove}
+      />
+    </div>
   );
 }
