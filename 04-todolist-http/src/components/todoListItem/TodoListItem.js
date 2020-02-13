@@ -35,7 +35,7 @@ function TodoListItem({ todo, onEdit, onDelete, onSave }) {
 }
 
 TodoListItem.propTypes = {
-  todo: propTypes.todoList.isRequired,
+  todo: propTypes.todoItem.isRequired,
   onEdit: propTypes.func.isRequired,
   onDelete: propTypes.func.isRequired,
   onSave: propTypes.func.isRequired
