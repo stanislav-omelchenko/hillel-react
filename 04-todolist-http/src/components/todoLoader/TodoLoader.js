@@ -1,6 +1,6 @@
 import React from "react";
 
-function TodoLoader() {
+function TodoLoader({ visibility }) {
   return <div></div>;
 }
 
