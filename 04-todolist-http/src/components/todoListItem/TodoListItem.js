@@ -19,12 +19,13 @@ function TodoListItem({ todo, onEdit, onDelete, onSave }) {
   }
 
   return (
-    <li onClick={onItemClick}>
-      {todo.title} {todo.isDone ? "Done" : "Not done"}
-      <button type="button" onClick={onEditClick}>
+    <li onClick={onItemClick} className={todo.isDone ? "done" : ""}>
+      <span className="tick">{todo.isDone ? "✔" : "✖"}</span>
+      <span className="title">{todo.title}</span>
+      <button type="button" onClick={onEditClick} className="edit-button">
         Edit
       </button>
-      <button type="button" onClick={onDeleteClick}>
+      <button type="button" onClick={onDeleteClick} className="delete-button">
         Delete
       </button>
     </li>

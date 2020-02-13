@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+
 import TodoEditModal from "../todoEditModal/TodoEditModal";
 import TodoList from "../todoList/TodoList";
 import api from "../../services/api";
-import TodoLoader from "../todoLoader/TodoLoader";
+
+import "./TodoApp.scss";
 
 function TodoApp() {
   const [todos, setTodos] = useState([]);
@@ -70,7 +72,9 @@ function TodoApp() {
 
   return (
     <>
-      <TodoLoader />
+      <header className="todo-header">
+        <div>Todo List</div>
+      </header>
       <TodoList
         todos={todos}
         onAddTodoClick={onAddTodoClick}

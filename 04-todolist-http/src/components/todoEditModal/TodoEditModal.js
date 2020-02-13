@@ -16,7 +16,9 @@ function TodoEditModal({ visible, todo, onChange, onSave, onClose }) {
     <div className={`todos-modal-container${visible ? "" : " hidden"}`}>
       <div className="todos-edit-modal">
         <form onSubmit={onSubmit}>
+          <div className="header">Adding new item in TODO list</div>
           <label htmlFor="title">Todo Title:</label>
+          <br />
           <input
             type="text"
             name="title"
@@ -24,9 +26,16 @@ function TodoEditModal({ visible, todo, onChange, onSave, onClose }) {
             value={todo.title}
             onChange={onInputChange}
           />
-          <button type="submit">{todo.id ? "Save todo" : "Create todo"}</button>
+          <div className="buttons-row">
+            <button type="submit" className="save">
+              {todo.id ? "Save todo" : "Create todo"}
+            </button>
+            <button type="button" onClick={onClose} className="cancel">
+              Cancel
+            </button>
+          </div>
         </form>
-        <button type="button" onClick={onClose}>
+        <button type="button" onClick={onClose} className="close">
           X
         </button>
       </div>
