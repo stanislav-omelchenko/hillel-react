@@ -1,5 +1,7 @@
 import React from "react";
 
+import propTypes from "../propTypes";
+
 function TodoListItem({ todo, onEdit, onDelete, onSave }) {
   function onDeleteClick(e) {
     e.stopPropagation();
@@ -31,5 +33,12 @@ function TodoListItem({ todo, onEdit, onDelete, onSave }) {
     </li>
   );
 }
+
+TodoListItem.propTypes = {
+  todo: propTypes.todoList.isRequired,
+  onEdit: propTypes.func.isRequired,
+  onDelete: propTypes.func.isRequired,
+  onSave: propTypes.func.isRequired
+};
 
 export default TodoListItem;

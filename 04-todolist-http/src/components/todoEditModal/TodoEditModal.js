@@ -1,5 +1,7 @@
 import React from "react";
 
+import propTypes from "../propTypes";
+
 function TodoEditModal({ visible, todo, onChange, onSave, onClose }) {
   function onInputChange(e) {
     onChange({
@@ -42,5 +44,13 @@ function TodoEditModal({ visible, todo, onChange, onSave, onClose }) {
     </div>
   );
 }
+
+TodoEditModal.propTypes = {
+  visible: propTypes.bool.isRequired,
+  todo: propTypes.todoItem.isRequired,
+  onChange: propTypes.func.isRequired,
+  onSave: propTypes.func.isRequired,
+  onClose: propTypes.func.isRequired
+};
 
 export default TodoEditModal;
