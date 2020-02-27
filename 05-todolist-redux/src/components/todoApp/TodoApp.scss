@@ -1,0 +1,139 @@
+button {
+  padding: 0.5rem;
+}
+.todo-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 3rem;
+  width: 100%;
+
+  background-color: #333;
+  color: #ddd;
+
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+.todos-list-cointainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  ul {
+    border-radius: 2px;
+    box-shadow: black 0 0 1px;
+    padding: 0;
+
+    li {
+      display: flex;
+      list-style: none;
+      padding: 1rem;
+      align-items: center;
+      //   padding-bottom: 1rem;
+
+      .tick {
+        display: inline-block;
+        width: 24px;
+        color: red;
+      }
+
+      &.done {
+        .tick {
+          color: green;
+        }
+      }
+
+      &:nth-child(odd) {
+        background-color: rgba(250, 250, 250, 1);
+        &.done {
+          background-color: rgba(200, 250, 200, 0.5);
+        }
+      }
+      &:nth-child(even) {
+        &.done {
+          background-color: rgba(200, 255, 200, 0.5);
+        }
+      }
+      &:nth-child(1) {
+        border-top-right-radius: 2px;
+        border-top-left-radius: 2px;
+      }
+
+      &:nth-last-child(1) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .title {
+        margin-right: 1rem;
+        max-width: 800px;
+      }
+      .edit-button {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+.todos-modal-container {
+  display: flex;
+  position: fixed;
+
+  align-items: center;
+  justify-content: center;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: rgba($color: #000000, $alpha: 0.8);
+
+  &.hidden {
+    display: none;
+  }
+
+  .todos-edit-modal {
+    position: relative;
+    background-color: #eee;
+
+    padding: 2rem;
+    padding-top: 0.5rem;
+    border-radius: 2px;
+    box-shadow: black 0 0 0.5rem;
+    width: 500px;
+
+    .header {
+      margin: 0;
+      font-size: large;
+      text-align: center;
+      font-weight: bolder;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .buttons-row {
+      display: flex;
+
+      .save {
+        margin-left: auto;
+      }
+    }
+
+    .close {
+      position: absolute;
+
+      top: 5px;
+      right: 5px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
