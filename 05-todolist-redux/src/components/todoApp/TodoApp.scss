@@ -31,6 +31,7 @@ button {
       list-style: none;
       padding: 1rem;
       align-items: center;
+      cursor: pointer;
       //   padding-bottom: 1rem;
 
       .tick {
@@ -65,6 +66,7 @@ button {
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: unset;
       }
 
       .title {

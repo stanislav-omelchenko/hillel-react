@@ -3,12 +3,7 @@ import TodoListItem from "../todoListItem/TodoListItem";
 
 import propTypes from "../propTypes";
 
-function TodoList({ todos, commit, remove }) {
-  function onButtonClick(e) {
-    e.preventDefault();
-    // onAddTodoClick();
-  }
-
+function TodoList({ todos, commitTodo, removeTodo, startEditing }) {
   return (
     <div className="todos-list-cointainer">
       <ul>
@@ -16,24 +11,24 @@ function TodoList({ todos, commit, remove }) {
           <TodoListItem
             key={todo.id}
             todo={todo}
-            commit={commit}
-            remove={remove}
+            commitTodo={commitTodo}
+            removeTodo={removeTodo}
+            startEditing={startEditing}
           />
         ))}
         <li>
-          <button onClick={onButtonClick}> Add new todo</button>
+          <button onClick={() => startEditing()}> Add new todo</button>
         </li>
       </ul>
     </div>
   );
 }
 
-// TodoList.propTypes = {
-//   todos: propTypes.todoList.isRequired,
-//   onAddTodoClick: propTypes.func.isRequired,
-//   onEdit: propTypes.func.isRequired,
-//   onDelete: propTypes.func.isRequired,
-//   onSave: propTypes.func.isRequired
-// };
+TodoList.propTypes = {
+  todos: propTypes.todoList.isRequired,
+  commitTodo: propTypes.func.isRequired,
+  removeTodo: propTypes.func.isRequired,
+  startEditing: propTypes.func.isRequired
+};
 
 export default TodoList;

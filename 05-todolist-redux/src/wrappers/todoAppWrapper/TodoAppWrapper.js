@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import TodoApp from "../todoApp/TodoApp";
-import { commitTodo, removeTodo } from "../../store/actions";
+import TodoApp from "../../components/todoApp/TodoApp";
+import { commitTodo, removeTodo, startEditing } from "../../store/actions";
 
 function mapStateToProps(state) {
   return {
@@ -10,8 +10,9 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  commit: commitTodo,
-  remove: removeTodo
+  commitTodo: commitTodo,
+  removeTodo: removeTodo,
+  startEditing: startEditing
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);

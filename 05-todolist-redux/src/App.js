@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 
 import store from "./store";
-import TodoApp from "./components/todoAppWrapper/TodoAppWrapper";
+import TodoApp from "./wrappers/todoAppWrapper/TodoAppWrapper";
 
 function App() {
   return (

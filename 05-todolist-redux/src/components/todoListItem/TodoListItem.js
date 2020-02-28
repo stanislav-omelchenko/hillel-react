@@ -2,14 +2,14 @@ import React from "react";
 
 import propTypes from "../propTypes";
 
-function TodoListItem({ todo, commit, remove }) {
+function TodoListItem({ todo, commitTodo, removeTodo, startEditing }) {
   function onDeleteClick(e) {
     e.stopPropagation();
-    remove(todo.id);
+    removeTodo(todo.id);
   }
 
   function onItemClick() {
-    commit({
+    commitTodo({
       ...todo,
       isDone: !todo.isDone
     });
@@ -17,7 +17,7 @@ function TodoListItem({ todo, commit, remove }) {
 
   function onEditClick(e) {
     e.stopPropagation();
-    // onEdit(todo);
+    startEditing(todo);
   }
 
   return (
@@ -36,9 +36,9 @@ function TodoListItem({ todo, commit, remove }) {
 
 TodoListItem.propTypes = {
   todo: propTypes.todoItem.isRequired,
-  onEdit: propTypes.func.isRequired,
-  onDelete: propTypes.func.isRequired,
-  onSave: propTypes.func.isRequired
+  commitTodo: propTypes.func.isRequired,
+  removeTodo: propTypes.func.isRequired,
+  startEditing: propTypes.func.isRequired
 };
 
 export default TodoListItem;

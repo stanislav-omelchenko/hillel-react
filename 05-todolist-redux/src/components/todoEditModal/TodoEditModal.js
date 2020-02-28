@@ -2,20 +2,20 @@ import React from "react";
 
 import propTypes from "../propTypes";
 
-function TodoEditModal({ visible, todo, onChange, onSave, onClose }) {
-  function onInputChange(e) {
-    onChange({
-      [e.target.name]: e.target.value
-    });
-  }
-
+function TodoEditModal({
+  modalVisibility,
+  currentTodo,
+  commitTodo,
+  cancelEditing,
+  editField
+}) {
   function onSubmit(e) {
     e.preventDefault();
-    onSave(todo);
+    commitTodo(currentTodo);
   }
 
   return (
-    <div className={`todos-modal-container${visible ? "" : " hidden"}`}>
+    <div className={`todos-modal-container${modalVisibility ? "" : " hidden"}`}>
       <div className="todos-edit-modal">
         <form onSubmit={onSubmit}>
           <div className="header">Adding new item in TODO list</div>
@@ -25,19 +25,19 @@ function TodoEditModal({ visible, todo, onChange, onSave, onClose }) {
             type="text"
             name="title"
             id="title"
-            value={todo.title}
-            onChange={onInputChange}
+            value={currentTodo.title}
+            onChange={e => editField({ [e.target.name]: e.target.value })}
           />
           <div className="buttons-row">
             <button type="submit" className="save">
-              {todo.id ? "Save todo" : "Create todo"}
+              {currentTodo.id ? "Save todo" : "Create todo"}
             </button>
-            <button type="button" onClick={onClose} className="cancel">
+            <button type="button" onClick={cancelEditing} className="cancel">
               Cancel
             </button>
           </div>
         </form>
-        <button type="button" onClick={onClose} className="close">
+        <button type="button" onClick={cancelEditing} className="close">
           X
         </button>
       </div>
@@ -46,11 +46,13 @@ function TodoEditModal({ visible, todo, onChange, onSave, onClose }) {
 }
 
 TodoEditModal.propTypes = {
-  visible: propTypes.bool.isRequired,
-  todo: propTypes.todoItem.isRequired,
-  onChange: propTypes.func.isRequired,
-  onSave: propTypes.func.isRequired,
-  onClose: propTypes.func.isRequired
+  modalVisibility: propTypes.bool.isRequired,
+  currentTodo: propTypes.todoItem.isRequired,
+  commitTodo: propTypes.func.isRequired,
+  cancelEditing: propTypes.func.isRequired,
+  editField: propTypes.func.isRequired
 };
 
 export default TodoEditModal;
+
+// export default TodoEditModal;
