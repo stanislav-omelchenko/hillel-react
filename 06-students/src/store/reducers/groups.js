@@ -5,10 +5,7 @@ import {
 } from "../actions/groups";
 
 const initialState = {
-  list: [
-    { id: 1, name: "Group 1" },
-    { id: 2, name: "Group 2" }
-  ],
+  list: [],
   search: ""
 };
 
@@ -17,7 +14,7 @@ function updateGroup(list, group) {
 }
 
 function createGroup(list, group) {
-  group.id = Date.now();
+  group.id = `${Date.now()}`;
 
   return [...list, group];
 }
@@ -26,7 +23,7 @@ export default function(state = initialState, { type, payload }) {
     case ACTION_SAVE_GROUP:
       return {
         ...state,
-        list: payload
+        list: payload.id
           ? updateGroup(state.list, payload)
           : createGroup(state.list, payload)
       };

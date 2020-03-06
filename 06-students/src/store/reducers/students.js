@@ -6,12 +6,7 @@ import {
 } from "../actions/students";
 
 const initialState = {
-  list: [
-    { id: 1, name: "Vasiliy Ivanov", groupId: 1 },
-    { id: 2, name: "Vasiliy NeIvanov", groupId: 2 },
-    { id: 3, name: "George Washington", groupId: 2 },
-    { id: 4, name: "Elon Musk", groupId: 1 }
-  ],
+  list: [],
   search: ""
 };
 
@@ -22,7 +17,7 @@ function updateStudent(list, student) {
 function createStudent(list, student) {
   student.id = Date.now();
 
-  return [...list, student];
+  return [...list, { ...student, id: `${Date.now()}` }];
 }
 
 export default function(state = initialState, { type, payload }) {
@@ -35,14 +30,15 @@ export default function(state = initialState, { type, payload }) {
     case ACTION_SAVE_STUDENT:
       return {
         ...state,
-        list: payload
+        list: payload.id
           ? updateStudent(state.list, payload)
           : createStudent(state.list, payload)
       };
     case ACTION_REMOVE_STUDENT:
+      console.log(state, type, payload);
       return {
         ...state,
-        list: state.list.filter(group => group.id !== payload)
+        list: state.list.filter(student => student.id !== payload)
       };
     case ACTION_SEARCH_STUDENT:
       return { ...state, search: payload };
