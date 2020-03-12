@@ -5,7 +5,7 @@ import {
 } from "../actions/groups";
 
 const initialState = {
-  list: [],
+  list: [...Array(5).keys()].map(i => ({ id: `${i}`, name: `Group ${i + 1}` })),
   search: ""
 };
 

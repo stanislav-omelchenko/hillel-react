@@ -2,8 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { useRouteMatch, Link } from "react-router-dom";
 import { removeStudent, searchStudent } from "../../store/actions/students";
+import StudentsListItem from "./StudentsListItem";
 
-function StudentsList({ students, removeStudent, searchStudent, search }) {
+function StudentsList({
+  groups,
+  students,
+  removeStudent,
+  searchStudent,
+  search
+}) {
   const { url } = useRouteMatch();
   return (
     <>
@@ -17,26 +24,23 @@ function StudentsList({ students, removeStudent, searchStudent, search }) {
       </div>
       <ul>
         {students.map(student => (
-          <li key={student.id}>
-            <Link to={`${url}/${student.id}`}>{student.name}</Link>
-            <button
-              className="remove"
-              onClick={() => removeStudent(student.id)}
-            >
-              x
-            </button>
-          </li>
+          <StudentsListItem
+            key={student.id}
+            student={student}
+            group={groups.find(group => group.id === student.groupId)}
+            removeStudent={removeStudent}
+          />
         ))}
       </ul>
     </>
   );
 }
 
-function mapStateToProps({ students }) {
+function mapStateToProps({ students, groups }) {
+  const rex = new RegExp(students.search, "gi");
   return {
-    students: students.list.filter(student =>
-      student.name.includes(students.search)
-    ),
+    groups: groups.list,
+    students: students.list.filter(student => student.name.match(rex)),
     search: students.search
   };
 }

@@ -4,14 +4,15 @@ import { saveStudent } from "../../store/actions/students";
 import { removeStudent } from "../../store/actions/students";
 
 function StudentForm({ student, groups, saveStudent, removeStudent, history }) {
-  console.log(student);
   const [name, setName] = useState(student.name);
   const [groupId, setGroupId] = useState(student.groupId);
+
   function onSaveClick(e) {
     e.preventDefault();
     saveStudent({ id: student.id, groupId: groupId, name });
     history.goBack();
   }
+
   return (
     <div>
       <form onSubmit={onSaveClick}>
@@ -48,7 +49,9 @@ function mapStateToProps({ groups, students }, { match }) {
   const student = students.list.find(student => student.id === match.params.id);
   return {
     student:
-      student !== undefined ? student : { id: "", name: "", groupId: "0" },
+      student !== undefined
+        ? student
+        : { id: "", name: "", groupId: groups.list[0].id },
     groups: groups.list
   };
 }

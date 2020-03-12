@@ -6,7 +6,11 @@ import {
 } from "../actions/students";
 
 const initialState = {
-  list: [],
+  list: [...Array(10).keys()].map(i => ({
+    id: `${i}`,
+    name: `Student ${i + 1}`,
+    groupId: `${Math.floor(i / 2)}`
+  })),
   search: ""
 };
 
@@ -35,7 +39,6 @@ export default function(state = initialState, { type, payload }) {
           : createStudent(state.list, payload)
       };
     case ACTION_REMOVE_STUDENT:
-      console.log(state, type, payload);
       return {
         ...state,
         list: state.list.filter(student => student.id !== payload)

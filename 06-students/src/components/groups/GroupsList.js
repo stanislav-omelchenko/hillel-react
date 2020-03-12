@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { useRouteMatch, Link } from "react-router-dom";
 import { removeGroup, searchGroup } from "../../store/actions/groups";
+import GroupsListItem from "./GroupsListItem";
 
 function GroupsList({ groups, removeGroup, search, searchGroup }) {
   const { url } = useRouteMatch();
-  console.log(groups);
   return (
     <>
       <Link to={`${url}/new`}>Add Group</Link>
@@ -19,12 +19,11 @@ function GroupsList({ groups, removeGroup, search, searchGroup }) {
       </div>
       <ul>
         {groups.map(group => (
-          <li key={group.id}>
-            <Link to={`${url}/${group.id}`}>{group.name}</Link>
-            <button className="remove" onClick={() => removeGroup(group.id)}>
-              x
-            </button>
-          </li>
+          <GroupsListItem
+            key={group.id}
+            group={group}
+            removeGroup={removeGroup}
+          />
         ))}
       </ul>
     </>
@@ -32,8 +31,9 @@ function GroupsList({ groups, removeGroup, search, searchGroup }) {
 }
 
 function mapStateToProps({ groups }) {
+  const rex = new RegExp(groups.search, "gi");
   return {
-    groups: groups.list.filter(group => group.name.includes(groups.search)),
+    groups: groups.list.filter(group => group.name.match(rex)),
     search: groups.search
   };
 }
