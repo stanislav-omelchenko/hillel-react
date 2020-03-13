@@ -3,7 +3,6 @@ import { Link, useRouteMatch } from "react-router-dom";
 
 function StudentsListItem({ student, group, removeStudent }) {
   const { url } = useRouteMatch();
-  console.log();
   return (
     <li key={student.id}>
       <Link to={`${url}/${student.id}`}>
