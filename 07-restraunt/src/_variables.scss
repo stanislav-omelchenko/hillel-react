@@ -1,0 +1,22 @@
+$accent-color: #30baaa;
+
+$menu-bg-color: #131313;
+$menu-fg-color: #dfdfdf;
+
+$menu-item-active-bg-color: $accent-color;
+$menu-item-active-fg-color: #ffffff;
+
+$header-bg-color: darken($menu-bg-color, 10%);
+$header-fg-color: $menu-fg-color;
+
+$footer-bg-color: $menu-fg-color;
+$footer-fg-color: $menu-bg-color;
+
+$table-head-bg-color: $accent-color;
+$table-head-fg-color: #ffffff;
+
+$table-tr-even-bg-color: $menu-fg-color;
+$table-tr-odd-bg-color: lighten($menu-fg-color, 10%);
+$table-tr-hover-bg-color: darken($menu-fg-color, 5%);
+
+$table-tr-fg-color: $menu-bg-color;
