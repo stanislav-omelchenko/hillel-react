@@ -4,6 +4,7 @@ import TablesList from "../TablesList/TablesList";
 import TablePage from "../TablePage/TablePage";
 import { connect } from "react-redux";
 import { getTables } from "../../../store/actions/tables";
+import propTypes from "../../propTypes";
 
 function Tables({ getTables }) {
   const { path } = useRouteMatch();
@@ -17,6 +18,10 @@ function Tables({ getTables }) {
     </Switch>
   );
 }
+
+Tables.propTypes = {
+  getTables: propTypes.func.isRequired
+};
 
 const mapDispatchToProps = {
   getTables: getTables

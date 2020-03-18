@@ -4,6 +4,7 @@ import WaitersListItem from "../WaitersListItem/WaitersListItem";
 import { Link, useRouteMatch } from "react-router-dom";
 import { deleteWaiter, setWaiterSearch } from "../../../store/actions/waiters";
 import { escapeRegExp } from "../../../utils";
+import propTypes from "../../propTypes";
 
 function WaitersList({
   waiters,
@@ -64,6 +65,14 @@ function WaitersList({
     </>
   );
 }
+
+WaitersList.propTypes = {
+  waiters: propTypes.waitersList.isRequired,
+  search: propTypes.string.isRequired,
+  currentRequestsCount: propTypes.number.isRequired,
+  deleteWaiter: propTypes.func.isRequired,
+  setWaiterSearch: propTypes.func.isRequired
+};
 
 function mapStateToProps({ waiters }) {
   const rex = new RegExp(escapeRegExp(waiters.search), "gi");

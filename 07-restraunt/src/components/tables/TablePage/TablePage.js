@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { saveTable } from "../../../store/actions/tables";
+import propTypes from "../../propTypes";
 
 function TablePage({ table, saveTable }) {
   const [internalTable, setInternalTable] = useState(table);
@@ -69,6 +70,11 @@ function TablePage({ table, saveTable }) {
     </div>
   );
 }
+
+TablePage.propTypes = {
+  table: propTypes.table.isRequired,
+  saveTable: propTypes.func.isRequired
+};
 
 function mapStateToProps({ tables }, { match }) {
   const table =

@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link, useRouteMatch } from "react-router-dom";
+import propTypes from "../../propTypes";
 
 function WaitersListItem({ waiter, deleteWaiter }) {
   const { url } = useRouteMatch();
@@ -33,5 +34,10 @@ function WaitersListItem({ waiter, deleteWaiter }) {
     </tr>
   );
 }
+
+WaitersListItem.propTypes = {
+  waiter: propTypes.waiter,
+  deleteWaiter: propTypes.func.isRequired
+};
 
 export default WaitersListItem;

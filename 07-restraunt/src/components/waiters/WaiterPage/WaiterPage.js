@@ -2,15 +2,10 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { saveWaiter } from "../../../store/actions/waiters";
+import { dateToYMD } from "../../../utils";
+import propTypes from "../../propTypes";
 
-function dateToYMD(date) {
-  var d = date.getDate();
-  var m = date.getMonth() + 1; //Month from 0 to 11
-  var y = date.getFullYear();
-  return "" + y + "-" + (m <= 9 ? "0" + m : m) + "-" + (d <= 9 ? "0" + d : d);
-}
-
-function WaiterPage({ waiter, currentRequestsCount, saveWaiter }) {
+function WaiterPage({ waiter, saveWaiter }) {
   const [internalWaiter, setInternalWaiter] = useState(waiter);
 
   const history = useHistory();
@@ -79,6 +74,11 @@ function WaiterPage({ waiter, currentRequestsCount, saveWaiter }) {
     </div>
   );
 }
+
+WaiterPage.propTypes = {
+  waiter: propTypes.waiter,
+  saveWaiter: propTypes.func.isRequired
+};
 
 function mapStateToProps({ waiters }, { match }) {
   const waiter =

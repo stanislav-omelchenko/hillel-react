@@ -4,6 +4,7 @@ import TablesListItem from "../TablesListItem/TablesListItem";
 import { Link, useRouteMatch } from "react-router-dom";
 import { deleteTable, setTableSearch } from "../../../store/actions/tables";
 import { escapeRegExp } from "../../../utils";
+import propTypes from "../../propTypes";
 
 function TablesList({
   tables,
@@ -64,6 +65,14 @@ function TablesList({
     </>
   );
 }
+
+TablesList.propTypes = {
+  tables: propTypes.tablesList.isRequired,
+  search: propTypes.string.isRequired,
+  currentRequestsCount: propTypes.number.isRequired,
+  deleteTable: propTypes.func.isRequired,
+  setTableSearch: propTypes.func.isRequired
+};
 
 function mapStateToProps({ tables }) {
   const rex = new RegExp(escapeRegExp(tables.search), "gi");

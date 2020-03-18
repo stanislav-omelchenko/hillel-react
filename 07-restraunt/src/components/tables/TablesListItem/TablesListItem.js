@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link, useRouteMatch } from "react-router-dom";
+import propTypes from "../../propTypes";
 
 function TablesListItem({ table, deleteTable }) {
   const { url } = useRouteMatch();
@@ -31,5 +32,10 @@ function TablesListItem({ table, deleteTable }) {
     </tr>
   );
 }
+
+TablesListItem.propTypes = {
+  table: propTypes.table,
+  deleteTable: propTypes.func.isRequired
+};
 
 export default TablesListItem;

@@ -4,6 +4,7 @@ import WaitersList from "../WaitersList/WaitersList";
 import WaiterPage from "../WaiterPage/WaiterPage";
 import { connect } from "react-redux";
 import { getWaiters } from "../../../store/actions/waiters";
+import propTypes from "../../propTypes";
 
 function Waiters({ getWaiters }) {
   const { path } = useRouteMatch();
@@ -17,6 +18,10 @@ function Waiters({ getWaiters }) {
     </Switch>
   );
 }
+
+Waiters.propTypes = {
+  getWaiters: propTypes.func.isRequired
+};
 
 const mapDispatchToProps = {
   getWaiters: getWaiters
