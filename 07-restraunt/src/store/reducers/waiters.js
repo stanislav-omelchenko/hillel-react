@@ -10,13 +10,13 @@ const initialState = {
       id: 1,
       name: "Ali Baba",
       salary: 10101,
-      startDate: Date.now() / 1000 - 60 * 60 * 24 * 30
+      startDate: Math.floor(Date.now() / 1000)
     },
     {
       id: 2,
       name: "Thug 1",
       salary: 1010,
-      startDate: Date.now() / 1000 - 60 * 60 * 24 * 30
+      startDate: Math.floor(Date.now() / 1000 - 60 * 60 * 24 * 30)
     }
   ],
   search: ""

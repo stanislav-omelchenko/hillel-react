@@ -1,8 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { Link, useRouteMatch } from "react-router-dom";
 
 function WaitersListItem({ waiter }) {
+  const { url } = useRouteMatch();
+
   return (
     <tr>
       <td className="shrink">{waiter.id}</td>
@@ -13,9 +16,11 @@ function WaitersListItem({ waiter }) {
       </td>
 
       <td className="shrink">
-        <button>
-          <FontAwesomeIcon icon={faPencilAlt} />
-        </button>
+        <Link to={`${url}/${waiter.id}`}>
+          <button>
+            <FontAwesomeIcon icon={faPencilAlt} />
+          </button>
+        </Link>
         <button>
           <FontAwesomeIcon icon={faTrash} />
         </button>

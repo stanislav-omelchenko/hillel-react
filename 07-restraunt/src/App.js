@@ -14,14 +14,14 @@ import Tables from "./components/tables/Tables/Tables";
 function App() {
   return (
     <Router>
-      <div class="grid-container">
-        <header class="header">
+      <div className="grid-container">
+        <header className="header">
           <h1>Restraunt Control Panel</h1>
         </header>
-        <nav class="navbar">
+        <nav className="navbar">
           <NavBar />
         </nav>
-        <section class="body">
+        <section className="body">
           <Switch>
             <Route path="/tables" component={Tables} />
             <Route path="/waiters" component={Waiters} />
@@ -30,7 +30,7 @@ function App() {
             </Route>
           </Switch>
         </section>
-        <footer class="footer"></footer>
+        <footer className="footer"></footer>
       </div>
     </Router>
   );

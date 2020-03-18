@@ -99,3 +99,25 @@
   background-color: $footer-bg-color;
   color: $footer-fg-color;
 }
+
+.entity-page {
+  margin-top: 0.5rem;
+
+  label {
+    display: block;
+
+    margin-top: 0.5rem;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 14pt;
+  }
+
+  button {
+    margin-top: 1rem;
+    padding: 0.5rem;
+  }
+}
