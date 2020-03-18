@@ -2,13 +2,29 @@ import React from "react";
 import { connect } from "react-redux";
 import WaitersListItem from "../WaitersListItem/WaitersListItem";
 import { Link, useRouteMatch } from "react-router-dom";
-import { deleteWaiter } from "../../../store/actions/waiters";
+import { deleteWaiter, setWaiterSearch } from "../../../store/actions/waiters";
+import { escapeRegExp } from "../../../utils";
 
-function WaitersList({ waiters, deleteWaiter, currentRequestsCount }) {
+function WaitersList({
+  waiters,
+  search,
+  currentRequestsCount,
+  deleteWaiter,
+  setWaiterSearch
+}) {
   const { url } = useRouteMatch();
 
   return (
     <>
+      <div className="search">
+        <label htmlFor="search-bar">Search: </label>
+        <input
+          id="search-bar"
+          className="search-field"
+          value={search}
+          onChange={({ target }) => setWaiterSearch(target.value)}
+        />
+      </div>
       <table className="table waiters-table">
         <thead>
           <tr>
@@ -50,7 +66,7 @@ function WaitersList({ waiters, deleteWaiter, currentRequestsCount }) {
 }
 
 function mapStateToProps({ waiters }) {
-  const rex = new RegExp(waiters.search, "gi");
+  const rex = new RegExp(escapeRegExp(waiters.search), "gi");
   return {
     waiters: waiters.list.filter(waiter => waiter.name.match(rex)),
     search: waiters.search,
@@ -59,8 +75,8 @@ function mapStateToProps({ waiters }) {
 }
 
 const mapDispatchToProps = {
-  deleteWaiter: deleteWaiter
-  //   searchStudent: searchStudent
+  deleteWaiter: deleteWaiter,
+  setWaiterSearch: setWaiterSearch
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WaitersList);

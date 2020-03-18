@@ -31,7 +31,7 @@ export default function(state = initialState, { type, payload }) {
         list: state.list.filter(item => item.id !== payload)
       };
     case ACTION_WAITER_SET_SEARCH:
-      return state;
+      return { ...state, search: payload };
     case ACTION_WAITERS_SET:
       return { ...state, list: payload };
     case ACTION_WAITER_CHANGE_REQUEST_COUNT:

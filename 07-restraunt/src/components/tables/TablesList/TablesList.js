@@ -2,13 +2,29 @@ import React from "react";
 import { connect } from "react-redux";
 import TablesListItem from "../TablesListItem/TablesListItem";
 import { Link, useRouteMatch } from "react-router-dom";
-import { deleteTable } from "../../../store/actions/tables";
+import { deleteTable, setTableSearch } from "../../../store/actions/tables";
+import { escapeRegExp } from "../../../utils";
 
-function TablesList({ tables, deleteTable, currentRequestsCount }) {
+function TablesList({
+  tables,
+  search,
+  currentRequestsCount,
+  deleteTable,
+  setTableSearch
+}) {
   const { url } = useRouteMatch();
 
   return (
     <>
+      <div className="search">
+        <label htmlFor="search-bar">Search: </label>
+        <input
+          id="search-bar"
+          className="search-field"
+          value={search}
+          onChange={({ target }) => setTableSearch(target.value)}
+        />
+      </div>
       <table className="table tables-table">
         <thead>
           <tr>
@@ -50,7 +66,7 @@ function TablesList({ tables, deleteTable, currentRequestsCount }) {
 }
 
 function mapStateToProps({ tables }) {
-  const rex = new RegExp(tables.search, "gi");
+  const rex = new RegExp(escapeRegExp(tables.search), "gi");
   return {
     tables: tables.list.filter(table => table.name.match(rex)),
     search: tables.search,
@@ -59,8 +75,8 @@ function mapStateToProps({ tables }) {
 }
 
 const mapDispatchToProps = {
-  deleteTable: deleteTable
-  //   searchStudent: searchStudent
+  deleteTable: deleteTable,
+  setTableSearch: setTableSearch
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TablesList);

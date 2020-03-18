@@ -31,7 +31,7 @@ export default function(state = initialState, { type, payload }) {
         list: state.list.filter(item => item.id !== payload)
       };
     case ACTION_TABLE_SET_SEARCH:
-      return state;
+      return { ...state, search: payload };
     case ACTION_TABLES_SET:
       return { ...state, list: payload };
     case ACTION_TABLE_CHANGE_REQUEST_COUNT:
@@ -39,6 +39,7 @@ export default function(state = initialState, { type, payload }) {
         ...state,
         currentRequestsCount: state.currentRequestsCount + payload
       };
+
     default:
       return state;
   }
