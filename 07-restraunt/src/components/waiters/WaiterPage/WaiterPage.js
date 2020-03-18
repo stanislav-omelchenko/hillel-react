@@ -86,7 +86,7 @@ function mapStateToProps({ waiters }, { match }) {
     match.params.id === "create"
       ? {
           name: "",
-          salary: 1000,
+          salary: 50,
           startDate: Math.floor(Date.now() / 1000)
         }
       : waiters.list.find(waiter => waiter.id === match.params.id);
