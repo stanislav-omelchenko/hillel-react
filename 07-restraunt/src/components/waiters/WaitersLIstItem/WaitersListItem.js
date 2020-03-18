@@ -3,8 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link, useRouteMatch } from "react-router-dom";
 
-function WaitersListItem({ waiter }) {
+function WaitersListItem({ waiter, deleteWaiter }) {
   const { url } = useRouteMatch();
+
+  function onDeleteClick(e) {
+    e.preventDefault();
+    deleteWaiter(waiter.id);
+  }
 
   return (
     <tr>
@@ -21,7 +26,7 @@ function WaitersListItem({ waiter }) {
             <FontAwesomeIcon icon={faPencilAlt} />
           </button>
         </Link>
-        <button>
+        <button onClick={onDeleteClick}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </td>

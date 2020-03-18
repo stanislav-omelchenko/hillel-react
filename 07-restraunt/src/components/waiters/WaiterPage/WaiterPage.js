@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
+import { saveWaiter } from "../../../store/actions/waiters";
 
 function dateToYMD(date) {
   var d = date.getDate();
@@ -9,13 +10,14 @@ function dateToYMD(date) {
   return "" + y + "-" + (m <= 9 ? "0" + m : m) + "-" + (d <= 9 ? "0" + d : d);
 }
 
-function WaiterPage({ waiter }) {
+function WaiterPage({ waiter, saveWaiter }) {
   const [internalWaiter, setInternalWaiter] = useState(waiter);
 
   const history = useHistory();
 
   function onSubmit(e) {
     e.preventDefault();
+    saveWaiter(internalWaiter);
     history.push("/waiters");
   }
 
@@ -51,11 +53,11 @@ function WaiterPage({ waiter }) {
             value={internalWaiter.name}
             onChange={fieldChanged}
           />
-          <label htmlFor="salary">Salary</label>
+          <label htmlFor="salary">Salary (per hour)</label>
           <input
             type="number"
-            min="1000"
-            max="9999"
+            min="1"
+            max="100"
             name="salary"
             id="salary"
             value={internalWaiter.salary}
@@ -79,6 +81,7 @@ function WaiterPage({ waiter }) {
 }
 
 function mapStateToProps({ waiters }, { match }) {
+  console.log(waiters);
   const waiter =
     match.params.id === "create"
       ? {
@@ -86,11 +89,15 @@ function mapStateToProps({ waiters }, { match }) {
           salary: 1000,
           startDate: Math.floor(Date.now() / 1000)
         }
-      : waiters.list.find(waiter => waiter.id === +match.params.id);
+      : waiters.list.find(waiter => waiter.id === match.params.id);
 
   return {
     waiter: waiter
   };
 }
 
-export default connect(mapStateToProps)(WaiterPage);
+const mapDispatchToProps = {
+  saveWaiter: saveWaiter
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WaiterPage);

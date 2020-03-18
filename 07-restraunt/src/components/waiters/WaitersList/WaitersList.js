@@ -2,8 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import WaitersListItem from "../WaitersLIstItem/WaitersListItem";
 import { Link, useRouteMatch } from "react-router-dom";
+import { deleteWaiter } from "../../../store/actions/waiters";
 
-function WaitersList({ waiters }) {
+function WaitersList({ waiters, deleteWaiter }) {
   const { url } = useRouteMatch();
 
   return (
@@ -19,7 +20,11 @@ function WaitersList({ waiters }) {
       </thead>
       <tbody>
         {waiters.map(waiter => (
-          <WaitersListItem key={waiter.id} waiter={waiter} />
+          <WaitersListItem
+            key={waiter.id}
+            waiter={waiter}
+            deleteWaiter={deleteWaiter}
+          />
         ))}
       </tbody>
       <tfoot>
@@ -44,7 +49,7 @@ function mapStateToProps({ waiters }) {
 }
 
 const mapDispatchToProps = {
-  //   removeStudent: removeStudent,
+  deleteWaiter: deleteWaiter
   //   searchStudent: searchStudent
 };
 
