@@ -3,7 +3,9 @@ $accent-color: #30baaa;
 $menu-bg-color: #131313;
 $menu-fg-color: #dfdfdf;
 
+$menu-item-hover-bg-color: lighten($menu-bg-color, 10%);
 $menu-item-active-bg-color: $accent-color;
+$menu-item-active-hover-bg-color: lighten($accent-color, 10%);
 $menu-item-active-fg-color: #ffffff;
 
 $header-bg-color: darken($menu-bg-color, 10%);

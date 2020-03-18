@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import WaitersListItem from "../WaitersLIstItem/WaitersListItem";
+import WaitersListItem from "../WaitersListItem/WaitersListItem";
 import { Link, useRouteMatch } from "react-router-dom";
 import { deleteWaiter } from "../../../store/actions/waiters";
 
@@ -9,7 +9,7 @@ function WaitersList({ waiters, deleteWaiter, currentRequestsCount }) {
 
   return (
     <>
-      <table className="waiters-table">
+      <table className="table waiters-table">
         <thead>
           <tr>
             <td className="shrink">ID</td>
@@ -40,7 +40,7 @@ function WaitersList({ waiters, deleteWaiter, currentRequestsCount }) {
       </table>
       <div
         className={
-          currentRequestsCount > 0 ? "loading-active" : "loading-inactive"
+          currentRequestsCount > 0 ? "loading active" : "loading inactive"
         }
       >
         <span>Loading...</span>
