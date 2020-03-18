@@ -1,8 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import WaitersListItem from "../WaitersLIstItem/WaitersListItem";
+import { Link, useRouteMatch } from "react-router-dom";
 
 function WaitersList({ waiters }) {
+  const { url } = useRouteMatch();
+
   return (
     <table className="waiters-table">
       <thead>
@@ -19,6 +22,15 @@ function WaitersList({ waiters }) {
           <WaitersListItem key={waiter.id} waiter={waiter} />
         ))}
       </tbody>
+      <tfoot>
+        <tr>
+          <td colSpan="5">
+            <Link to={`${url}/create`}>
+              <button>Add new waiter</button>
+            </Link>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   );
 }

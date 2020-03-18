@@ -81,6 +81,18 @@
       }
     }
 
+    tfoot tr {
+      background-color: $table-head-bg-color;
+      color: $table-head-fg-color;
+
+      td {
+        text-align: center;
+
+        button {
+          padding: 0.5rem;
+        }
+      }
+    }
     td {
       padding: 0.5rem;
       vertical-align: middle;

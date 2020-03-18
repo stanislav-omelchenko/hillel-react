@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 function dateToYMD(date) {
   var d = date.getDate();
@@ -30,47 +31,59 @@ function WaiterPage({ waiter }) {
         break;
     }
     setInternalWaiter({
-      ...waiter,
+      ...internalWaiter,
       [e.target.name]: value
     });
   }
 
+  console.log(internalWaiter);
   return (
     <div className="entity-page">
-      <form onSubmit={onSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          name="name"
-          id="name"
-          value={internalWaiter.name}
-          onChange={fieldChanged}
-        />
-        <label htmlFor="salary">Salary</label>
-        <input
-          type="number"
-          min="1000"
-          max="9999"
-          name="salary"
-          id="salary"
-          value={internalWaiter.salary}
-          onChange={fieldChanged}
-        />
-        <label htmlFor="startDate">Start date</label>
-        <input
-          type="date"
-          name="startDate"
-          id="startDate"
-          value={dateToYMD(new Date(internalWaiter.startDate * 1000))}
-          onChange={fieldChanged}
-        />
-        <button type="submit">Save</button>
-      </form>
+      {waiter !== undefined ? (
+        <form onSubmit={onSubmit}>
+          <label htmlFor="name">Name</label>
+          <input
+            name="name"
+            id="name"
+            value={internalWaiter.name}
+            onChange={fieldChanged}
+          />
+          <label htmlFor="salary">Salary</label>
+          <input
+            type="number"
+            min="1000"
+            max="9999"
+            name="salary"
+            id="salary"
+            value={internalWaiter.salary}
+            onChange={fieldChanged}
+          />
+          <label htmlFor="startDate">Start date</label>
+          <input
+            type="date"
+            name="startDate"
+            id="startDate"
+            value={dateToYMD(new Date(internalWaiter.startDate * 1000))}
+            onChange={fieldChanged}
+          />
+          <button type="submit">Save</button>
+        </form>
+      ) : (
+        <Redirect to="/waiters" />
+      )}
     </div>
   );
 }
 
 function mapStateToProps({ waiters }, { match }) {
-  const waiter = waiters.list.find(waiter => waiter.id === +match.params.id);
+  const waiter =
+    match.params.id === "create"
+      ? {
+          name: "",
+          salary: 1000,
+          startDate: Math.floor(Date.now() / 1000)
+        }
+      : waiters.list.find(waiter => waiter.id === +match.params.id);
 
   return {
     waiter: waiter

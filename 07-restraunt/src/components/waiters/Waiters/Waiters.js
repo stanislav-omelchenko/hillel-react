@@ -5,6 +5,7 @@ import WaiterPage from "../WaiterPage/WaiterPage";
 
 function Waiters() {
   const { path } = useRouteMatch();
+
   return (
     <Switch>
       <Route exact path={`${path}/`} component={WaitersList} />
