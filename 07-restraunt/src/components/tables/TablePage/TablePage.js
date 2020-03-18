@@ -16,7 +16,6 @@ function TablePage({ table, saveTable }) {
 
   function fieldChanged(e) {
     e.preventDefault();
-    console.log(e.target.name, e.target.value, e.target.type);
     let value = e.target.value;
 
     switch (e.target.type) {
@@ -24,8 +23,7 @@ function TablePage({ table, saveTable }) {
       case "number":
         value = +value;
         break;
-      case "date":
-        value = Date.parse(value).valueOf() / 1000;
+      default:
         break;
     }
     setInternalTable({
@@ -34,7 +32,6 @@ function TablePage({ table, saveTable }) {
     });
   }
 
-  console.log(internalTable);
   return (
     <div className="entity-page">
       {table !== undefined ? (
@@ -74,13 +71,12 @@ function TablePage({ table, saveTable }) {
 }
 
 function mapStateToProps({ tables }, { match }) {
-  console.log(tables);
   const table =
     match.params.id === "create"
       ? {
           name: "",
-          salary: 50,
-          startDate: Math.floor(Date.now() / 1000)
+          description: "",
+          seatsCount: 4
         }
       : tables.list.find(table => table.id === match.params.id);
 

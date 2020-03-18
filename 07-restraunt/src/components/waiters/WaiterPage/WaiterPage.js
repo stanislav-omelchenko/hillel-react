@@ -10,7 +10,7 @@ function dateToYMD(date) {
   return "" + y + "-" + (m <= 9 ? "0" + m : m) + "-" + (d <= 9 ? "0" + d : d);
 }
 
-function WaiterPage({ waiter, saveWaiter }) {
+function WaiterPage({ waiter, currentRequestsCount, saveWaiter }) {
   const [internalWaiter, setInternalWaiter] = useState(waiter);
 
   const history = useHistory();
@@ -23,7 +23,6 @@ function WaiterPage({ waiter, saveWaiter }) {
 
   function fieldChanged(e) {
     e.preventDefault();
-    console.log(e.target.name, e.target.value, e.target.type);
     let value = e.target.value;
 
     switch (e.target.type) {
@@ -34,6 +33,8 @@ function WaiterPage({ waiter, saveWaiter }) {
       case "date":
         value = Date.parse(value).valueOf() / 1000;
         break;
+      default:
+        break;
     }
     setInternalWaiter({
       ...internalWaiter,
@@ -41,7 +42,6 @@ function WaiterPage({ waiter, saveWaiter }) {
     });
   }
 
-  console.log(internalWaiter);
   return (
     <div className="entity-page">
       {waiter !== undefined ? (
@@ -81,7 +81,6 @@ function WaiterPage({ waiter, saveWaiter }) {
 }
 
 function mapStateToProps({ waiters }, { match }) {
-  console.log(waiters);
   const waiter =
     match.params.id === "create"
       ? {
