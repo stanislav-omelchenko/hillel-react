@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 function dateToYMD(date) {
   var d = date.getDate();
@@ -12,8 +12,11 @@ function dateToYMD(date) {
 function WaiterPage({ waiter }) {
   const [internalWaiter, setInternalWaiter] = useState(waiter);
 
+  const history = useHistory();
+
   function onSubmit(e) {
     e.preventDefault();
+    history.push("/waiters");
   }
 
   function fieldChanged(e) {

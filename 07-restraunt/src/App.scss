@@ -65,6 +65,7 @@
   .waiters-table {
     width: 100%;
     border-collapse: collapse;
+    border: 1px solid $table-head-bg-color;
 
     thead tr {
       background-color: $table-head-bg-color;
